@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h> /*defines data types used in system source code*/
-#include <errno.h> /*defines macros for reporting and retrieving error conditions*/
+#include <errno.h>
 #include <sys/stat.h> /*getting information about files attributes.*/
 #include <fcntl.h> /*contains constructs that refer to file control*/
 #include <unistd.h>
@@ -40,6 +40,19 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/**
+ * struct glob_s - global and its funcs
+ * @fd: File descriptor
+ * @line: Line to getline
+ *
+ * Description: To handle the file and getline
+ */
+typedef struct glob_s
+{
+	FILE *fd;
+	char *line;
+} glob_t;
+
 extern glob_t global;
 extern int value;
 
@@ -51,5 +64,6 @@ void pop(stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_number);
 void add(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
+void cleanStack(stack_t **stack);
 
 #endif /* MONTY_H */
